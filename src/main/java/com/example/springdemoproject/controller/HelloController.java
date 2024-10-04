@@ -1,5 +1,6 @@
 package com.example.springdemoproject.controller;
 
+import com.example.springdemoproject.ioc.Member;
 import com.example.springdemoproject.service.HelloService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,12 +13,14 @@ public class HelloController {
     // 필드 선언
     private final HelloService service;   // Dependency Injection
 
+    // 생성자 주입 방식
     public HelloController(HelloService service) {
         this.service = service;
     }
 
     @GetMapping("/hello")  // 패턴 입력
     public String hello(@RequestParam(value = "param", defaultValue = " Spring!!") String param) {
-        return service.printHello(param);
+        Member member = new Member(1, "kkb", "address");
+        return service.printHello(param) + member;
     }
 }
