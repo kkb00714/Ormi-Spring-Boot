@@ -32,6 +32,15 @@ public class Member {
     }
 
     public void setAddress(String address) {
-        this.address = address;
+        this.address = address;     
+    }
+
+    @Override
+    public String toString() {
+        return "Member{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                '}';
     }
 }
