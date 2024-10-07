@@ -17,7 +17,7 @@ public class HiController {
         this.service = service;
     }
 
-    @GetMapping("/hello")  // 패턴 입력
+    @GetMapping("hicontroller")  // 패턴 입력
     public String hello(@RequestParam(value = "param", defaultValue = " Spring!!") String param) {
         Member member = new Member(1, "kkb", "address");
         return service.printHello(param) + member;
