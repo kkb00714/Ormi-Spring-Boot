@@ -1,4 +1,4 @@
-package com.example.springdemoproject.ioc;
+package com.estsoft.springdemoproject.ioc;
 
 public class Member {
     private int id;
