@@ -24,7 +24,7 @@ public class HelloController {
     public String hello(@RequestParam(value = "param", defaultValue = " Spring!!") String param) {
         Member member = new Member(1, "kkb", "address");
         dependencyService.printMethod();
-        return service.printHello(param) + member;
+        return service.printHello(param) + member.toString();
     }
 
 

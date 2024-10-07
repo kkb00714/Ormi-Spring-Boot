@@ -11,7 +11,7 @@ public class SampleController {
     *
     * */
 
-    @GetMapping("Hi")
+    @GetMapping("/hello2")
     public String printHello() {
         return "hi";
     }

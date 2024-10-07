@@ -5,6 +5,15 @@ public class Member {
     private String name;
     private String address;
 
+    @Override
+    public String toString() {
+        return "Member{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                '}';
+    }
+
     public Member(int id, String name, String address) {
         this.id = id;
         this.name = name;
@@ -34,4 +43,6 @@ public class Member {
     public void setAddress(String address) {
         this.address = address;
     }
+
+
 }
