@@ -21,6 +21,7 @@ public class MemberService {
         return repository.findAll();
     }
 
-
-
+    public Member saveMember(Member member) {
+        return repository.save(member);
+    }
 }

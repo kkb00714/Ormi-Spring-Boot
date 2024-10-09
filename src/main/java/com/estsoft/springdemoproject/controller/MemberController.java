@@ -23,9 +23,9 @@ public class MemberController {
         return memberService.getAllMembers();
     }
 
-//    @PostMapping("/members")
-//    public List<Member> saveMember(@RequestBody Member member) {
-//        // member 정보 저장하는 service 코드
-//        return memberService.saveMember(member);
-//    }
+    @PostMapping("/members")
+    public Member saveMember(@RequestBody Member member) {
+        // member 정보 저장하는 service 코드
+        return memberService.saveMember(member);
+    }
 }
