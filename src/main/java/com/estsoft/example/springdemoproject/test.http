@@ -1,0 +1,13 @@
+### GET Student Name
+
+GET http://localhost:8080/student/1
+Content-Type: application/json
+
+### save Student
+POST http://localhost:8080/student?name=Chris&age=36
+Content-Type : application/json
+
+
+### save lectureCourse
+POST http://localhost:8080/lecture/course?title=spring-jpa&instructorId=1&capacity=30&from=2024-10-10&to=2024-10-11&desc=java_spring_jpa_강의
+Content-Type : application/json

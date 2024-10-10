@@ -1,4 +1,4 @@
-package com.estsoft.example.springdemoproject.entity;
+package com.estsoft.example.springdemoproject;
 
 import com.estsoft.springdemoproject.SpringDemoProjectApplication;
 import org.springframework.boot.SpringApplication;

@@ -1,7 +1,7 @@
-package com.estsoft.example.springdemoproject.entity.controller;
+package com.estsoft.example.springdemoproject.controller;
 
 import com.estsoft.example.springdemoproject.entity.Student;
-import com.estsoft.example.springdemoproject.entity.repository.StudentRepository;
+import com.estsoft.example.springdemoproject.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

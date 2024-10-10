@@ -27,6 +27,13 @@
     <!--        </rollingPolicy>-->
     <!--    </appender>-->
 
+    <!-- logging level trace > debug > info > warn > error -->
+    <logger name="org.hibernate" level="TRACE"/>
+    <logger name="org.hibernate.SQL" level="TRACE"/>
+    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE"/>
+    <logger name="org.hibernate.engine.transaction" level="TRACE"/>
+
+
     <root level="debug">
         <appender-ref ref="CONSOLE" />
     </root>
