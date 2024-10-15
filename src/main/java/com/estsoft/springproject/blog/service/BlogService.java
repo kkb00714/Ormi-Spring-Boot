@@ -15,7 +15,7 @@ public class BlogService {
 
     // blog 게시글 작성
     // repository.save(Article)
-    Article saveArticle(AddArticleRequest request) {
+    public Article saveArticle(AddArticleRequest request) {
         return repository.save(request.toEntity());
     }
 }
