@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -100,6 +101,25 @@ public class BlogControllerTest {
                 .andExpect(jsonPath("$.id").value(id))
                 .andExpect(jsonPath("$.title").value(article.getTitle()))
                 .andExpect(jsonPath("$.content").value(article.getContent()));
+    }
+
+    // 블로그 글 삭제 API 호출 테스트
+
+    @Test
+    public void deleteArticle() throws Exception {
+        // given
+        Article article = repository.save(new Article("i'm fine thank you", "And you?"));
+        Long id = article.getId();
+
+        // when
+        ResultActions resultActions = mockMvc.perform(delete("/articles/{id}", id));
+
+        // then
+        resultActions.andExpect(status().isOk());
+        List<Article> articleList = repository.findAll();
+        Assertions.assertThat(articleList).isEmpty();
+
+
     }
 
 
