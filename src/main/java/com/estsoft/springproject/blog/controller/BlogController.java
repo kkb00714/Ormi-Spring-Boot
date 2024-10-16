@@ -19,7 +19,7 @@ public class BlogController {
         this.service = service;
     }
 
-    // RequestMapping (특정 url   POST /articles)
+    // Create RequestMapping (특정 url   POST /articles)
     @PostMapping("/articles")
     public ResponseEntity<ArticleResponse> writeArticle(
             @RequestBody AddArticleRequest request
@@ -30,7 +30,7 @@ public class BlogController {
                 .body(article.convert());
     }
 
-    // RequestMapping   조회 : GET
+    // Read RequestMapping   조회 : GET
     @GetMapping("/articles")
     public ResponseEntity<List<ArticleResponse>> findArticles() {
 //        List<Article> articleList = service.findAll();
@@ -45,5 +45,13 @@ public class BlogController {
         Article article = service.findArticleById(id);
         // Article -> ArticleResponse 변환
         return ResponseEntity.ok(article.convert());
+    }
+
+    // Delete /articles/{id}
+    // @RequestMapping(method = RequestMethod.DELETE, value = "/articles/{id}")
+    @DeleteMapping("/articles/{id}")
+    public ResponseEntity<Void> deleteARticles(@PathVariable Long id) {
+        service.deleteArticleById(id);
+        return ResponseEntity.ok().build();
     }
 }

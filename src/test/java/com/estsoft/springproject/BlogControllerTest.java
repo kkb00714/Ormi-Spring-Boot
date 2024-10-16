@@ -100,6 +100,7 @@ public class BlogControllerTest {
                 .andExpect(jsonPath("$.id").value(id))
                 .andExpect(jsonPath("$.title").value(article.getTitle()))
                 .andExpect(jsonPath("$.content").value(article.getContent()));
-
     }
+
+
 }

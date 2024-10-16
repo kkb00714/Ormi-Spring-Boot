@@ -32,4 +32,9 @@ public class BlogService {
         return repository.findById(id)
                 .orElseThrow( () ->new IllegalArgumentException("존재하지 않는 id : " + id));
     }
+
+    // blog 글 삭제
+    public void deleteArticleById(Long id) {
+        repository.deleteById(id);
+    }
 }
