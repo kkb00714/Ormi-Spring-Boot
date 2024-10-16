@@ -17,3 +17,12 @@ GET http://localhost:8080/articles/4
 
 ###
 DELETE http://localhost:8080/articles/1
+
+###
+PUT http://localhost:8080/articles/1
+Content-Type: application/json
+
+{
+  "title" : "집게리아인가요?",
+  "content" : "아뇨 뚱인데요."
+}

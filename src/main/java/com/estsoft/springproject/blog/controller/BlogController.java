@@ -3,6 +3,7 @@ package com.estsoft.springproject.blog.controller;
 import com.estsoft.springproject.blog.domain.dto.AddArticleRequest;
 import com.estsoft.springproject.blog.domain.Article;
 import com.estsoft.springproject.blog.domain.dto.ArticleResponse;
+import com.estsoft.springproject.blog.domain.dto.UpdateArticleRequest;
 import com.estsoft.springproject.blog.service.BlogService;
 import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
@@ -50,7 +51,7 @@ public class BlogController {
     // Delete /articles/{id}
     // @RequestMapping(method = RequestMethod.DELETE, value = "/articles/{id}")
     @DeleteMapping("/articles/{id}")
-    public ResponseEntity<Void> deleteARticles(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteArticles(@PathVariable Long id) {
         service.deleteArticleById(id);
         return ResponseEntity.ok().build();
     }
@@ -59,5 +60,15 @@ public class BlogController {
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<String> illegalArgumentException(IllegalArgumentException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());  // 에러 사유를 정의해서 넘겨준다?
+    }
+
+    // PUT /articles/{id} 수정 API -> RequestBody에 받기
+    @PutMapping("/articles/{id}")
+    public ResponseEntity<ArticleResponse> updateArticle (
+            @PathVariable Long id,
+            @RequestBody UpdateArticleRequest request)
+    {
+        Article updatedArticle = service.update(id, request);
+        return ResponseEntity.ok(updatedArticle.convert());
     }
 }
