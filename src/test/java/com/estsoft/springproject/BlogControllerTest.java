@@ -83,4 +83,23 @@ public class BlogControllerTest {
                 .andExpect(jsonPath("$[0].content").value(article.getContent()));
 
     }
+
+    // 게시글 한 개 조회 테스트케이스
+    @Test
+    public void findOne() throws Exception {
+        // given
+        Article article = repository.save(new Article("title123", "content321"));
+        Long id = article.getId();
+
+        // when
+        ResultActions resultActions = mockMvc.perform(get("/articles/{id}", id)
+                .accept(MediaType.APPLICATION_JSON));
+
+        // then
+        resultActions.andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(id))
+                .andExpect(jsonPath("$.title").value(article.getTitle()))
+                .andExpect(jsonPath("$.content").value(article.getContent()));
+
+    }
 }
