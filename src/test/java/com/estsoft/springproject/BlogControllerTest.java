@@ -43,6 +43,7 @@ public class BlogControllerTest {
         repository.deleteAll();
     }
 
+    // 게시글 생성 테스트코드
     @Test
     public void addArticle() throws Exception {
         // given
@@ -66,6 +67,7 @@ public class BlogControllerTest {
         Assertions.assertThat(articleList.size()).isEqualTo(2);
     }
 
+    // 게시글 전체 조회 테스트코드
     @Test
     public void findAll() throws Exception {
         // given : 조회 API에 필요한 값 셋팅
