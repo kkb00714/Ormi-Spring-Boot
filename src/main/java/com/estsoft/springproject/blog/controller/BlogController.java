@@ -1,13 +1,17 @@
 package com.estsoft.springproject.blog.controller;
 
-import com.estsoft.springproject.blog.domain.AddArticleRequest;
+import com.estsoft.springproject.blog.domain.dto.AddArticleRequest;
 import com.estsoft.springproject.blog.domain.Article;
+import com.estsoft.springproject.blog.domain.dto.ArticleResponse;
 import com.estsoft.springproject.blog.service.BlogService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 public class BlogController {
@@ -26,5 +30,16 @@ public class BlogController {
        Article article = service.saveArticle(request);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(article);
+    }
+
+    // RequestMapping   조회 : GET
+    @GetMapping("/articles")
+    public ResponseEntity<List<ArticleResponse>> findArticles() {
+//        List<Article> articleList = service.findAll();
+        List<ArticleResponse> list = service.findAll().stream()
+                .map(article -> new ArticleResponse(
+                        article.getId(), article.getTitle(), article.getContent()))
+                .toList();
+        return ResponseEntity.ok(list);
     }
 }

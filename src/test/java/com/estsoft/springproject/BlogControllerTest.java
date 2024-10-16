@@ -40,6 +40,7 @@ public class BlogControllerTest {
     @BeforeEach
     public void setUp() {
         mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
+        repository.deleteAll();
     }
 
     @Test
@@ -63,5 +64,21 @@ public class BlogControllerTest {
 
         List<Article> articleList = repository.findAll();
         Assertions.assertThat(articleList.size()).isEqualTo(2);
+    }
+
+    @Test
+    public void findAll() throws Exception {
+        // given : 조회 API에 필요한 값 셋팅
+        Article article = repository.save(new Article("title", "content"));
+
+        // when : 조회 API
+        ResultActions resultActions = mockMvc.perform(get("/articles")
+                .accept(MediaType.APPLICATION_JSON));
+
+        // then : API 호출 결과 검증 - json
+        resultActions.andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].title").value(article.getTitle()))
+                .andExpect(jsonPath("$[0].content").value(article.getContent()));
+
     }
 }
