@@ -54,4 +54,10 @@ public class BlogController {
         service.deleteArticleById(id);
         return ResponseEntity.ok().build();
     }
+
+    // 특정 Exception을 받았을 때
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<String> illegalArgumentException(IllegalArgumentException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());  // 에러 사유를 정의해서 넘겨준다?
+    }
 }

@@ -2,6 +2,7 @@ package com.estsoft.springproject;
 
 import com.estsoft.springproject.blog.domain.Article;
 import com.estsoft.springproject.blog.repository.BlogRepository;
+import com.estsoft.springproject.blog.service.BlogService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -37,6 +38,9 @@ public class BlogControllerTest {
 
     @Autowired
     private ObjectMapper objectMapper;
+
+    @Autowired
+    private BlogService blogService;
 
     @BeforeEach
     public void setUp() {
@@ -118,9 +122,20 @@ public class BlogControllerTest {
         resultActions.andExpect(status().isOk());
         List<Article> articleList = repository.findAll();
         Assertions.assertThat(articleList).isEmpty();
-
-
     }
 
+    // 단전 조회 API에서 id에 해당하는 자원이 없을 경우 400에러 예외처리 검증
+    @Test
+    public void findOneException() throws Exception {
+        // when
+        ResultActions resultActions = mockMvc.perform(get("/articles/{id}", 1L)
+                .accept(MediaType.APPLICATION_JSON));
+
+        // then
+        resultActions.andExpect(status().isBadRequest());
+
+        org.junit.jupiter.api.Assertions.assertThrows(IllegalArgumentException.class,
+                () -> blogService.findArticleById(1L));
+    }
 
 }
