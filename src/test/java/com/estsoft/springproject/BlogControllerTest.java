@@ -1,8 +1,10 @@
 package com.estsoft.springproject;
 
 import com.estsoft.springproject.blog.domain.Article;
+import com.estsoft.springproject.blog.domain.dto.UpdateArticleRequest;
 import com.estsoft.springproject.blog.repository.BlogRepository;
 import com.estsoft.springproject.blog.service.BlogService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -137,5 +139,25 @@ public class BlogControllerTest {
         org.junit.jupiter.api.Assertions.assertThrows(IllegalArgumentException.class,
                 () -> blogService.findArticleById(1L));
     }
+
+    // PUT /articles/{id}  body(json content) 요청
+    @Test
+    public void updateArticle() throws Exception {
+        Article article = repository.save(new Article("Update Test", "Test2"));
+        Long id = article.getId();
+
+        // 수정 데이터(object) -> json
+        UpdateArticleRequest request = new UpdateArticleRequest("변경 제목", "변경 내용");
+        String updateJsonContent = objectMapper.writeValueAsString(request);
+
+        ResultActions resultActions = mockMvc.perform(put("/articles/{id}", id)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(updateJsonContent));
+
+        resultActions.andExpect(status().isOk())
+                .andExpect(jsonPath("$.title").value(request.getTitle()))
+                .andExpect(jsonPath("$.content").value(request.getContent()));
+    }
+
 
 }
