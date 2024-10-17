@@ -88,7 +88,6 @@ public class BlogControllerTest {
         resultActions.andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].title").value(article.getTitle()))
                 .andExpect(jsonPath("$[0].content").value(article.getContent()));
-
     }
 
     // 게시글 한 개 조회 테스트케이스
@@ -158,6 +157,27 @@ public class BlogControllerTest {
                 .andExpect(jsonPath("$.title").value(request.getTitle()))
                 .andExpect(jsonPath("$.content").value(request.getContent()));
     }
+    
+    // 수정 API 호출시 예외 발생했을 경우 (수정하려는 id가 존재하지 않을 경우) => status 검증, Exception 검증
+    @Test
+    public void updateException() throws Exception {
+        // given
+        Long id = 13L;
+        
+        UpdateArticleRequest request = new UpdateArticleRequest("id1제목", "id2제목");
+        String updateJsonContent = objectMapper.writeValueAsString(request);
 
+        // when
+        ResultActions resultActions = mockMvc.perform(put("/articles/{id}", id)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(updateJsonContent));
+
+        // then
+        resultActions.andExpect(status().isBadRequest());
+
+        org.junit.jupiter.api.Assertions.assertThrows(IllegalArgumentException.class,
+                () -> blogService.update(id, request));
+
+    }
 
 }
