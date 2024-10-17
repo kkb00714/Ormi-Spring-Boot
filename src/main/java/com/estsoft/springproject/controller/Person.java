@@ -1,6 +1,5 @@
-package com.estsoft.springproject.blog.controller;
+package com.estsoft.springproject.controller;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
