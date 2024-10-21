@@ -31,8 +31,11 @@ public class Users implements UserDetails {
     @Column(nullable = false)
     private String password;
 
+    public Users(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
 
-    
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() { // Authorization, 인가(권한)
         return List.of(new SimpleGrantedAuthority("ROLE_ADMIN")); // 개발자가 정의한 역할
