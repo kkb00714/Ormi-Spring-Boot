@@ -25,7 +25,8 @@ public class WebSecurityConfiguration {
     public WebSecurityCustomizer ignore() {
         return webSecurity -> webSecurity.ignoring()
                 .requestMatchers(toH2Console()) // H2Console에 접근 시 로그인하지 않음.
-                .requestMatchers("/static/**"); // static 하위 html 페이지에 접근 시 로그인하지 않음.
+                .requestMatchers("/static/**", "/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html"); // static 하위 html 페이지에 접근 시 로그인하지 않음.
+
     }
 
     // 패스워드 암호화 방식 정의 - 패스워드를 암호화 할 수 있음. (Spring Security에서 제공)
