@@ -25,6 +25,8 @@ public class BlogPageController {
 
     @GetMapping("/articles")
     public String showArticle(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        // auth 값에 user, ROLE_ADMIN 둘 다 들어가있음.
         List<Article> articleList = service.findAll(); // Article 엔티티 리스트를 가져옴
         // Article -> ArticleViewResponse로 바꾸기
 

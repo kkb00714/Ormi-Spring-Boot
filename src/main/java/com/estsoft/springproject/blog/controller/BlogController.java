@@ -36,7 +36,7 @@ public class BlogController {
     // Read RequestMapping   조회 : GET
     @GetMapping("/articles")
     public ResponseEntity<List<ArticleResponse>> findArticles() {
-//        List<Article> articleList = service.findAll();
+        List<Article> articleList = service.findAll();
         List<ArticleResponse> list = service.findAll().stream()
                 .map(Article::convert)  // article -> article.convert()
                 .toList();

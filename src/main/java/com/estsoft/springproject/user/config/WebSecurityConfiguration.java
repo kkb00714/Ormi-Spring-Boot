@@ -39,8 +39,9 @@ public class WebSecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity.authorizeHttpRequests(
                 custom -> custom.requestMatchers("/login", "/signup", "/user").permitAll()
+                        .requestMatchers("/articles/**").hasRole("ADMIN") // ROLE_ADMIN 만 접근하도록
                         .anyRequest().authenticated()
-                ) 
+                )
                 // 3) 인증, 인가 설정
                 /*
                 .requestMatchers("/login", "/signup", "/user").permitAll()
