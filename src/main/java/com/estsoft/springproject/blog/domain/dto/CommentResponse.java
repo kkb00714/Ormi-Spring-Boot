@@ -2,12 +2,16 @@ package com.estsoft.springproject.blog.domain.dto;
 
 import com.estsoft.springproject.blog.domain.Article;
 import com.estsoft.springproject.blog.domain.Comment;
+import com.estsoft.springproject.util.DateFormatUtil;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+import static com.estsoft.springproject.util.DateFormatUtil.formatter;
 
 @Getter
 @Setter
@@ -16,13 +20,15 @@ public class CommentResponse {
     private Long id;
     private Long article_id;
     private String body;
-    private LocalDateTime created_at;
+    private String created_at;
     private ArticleResponse article;
 
     public CommentResponse(Comment comment) {
+        Article articleFromComment = comment.getArticle();
+
         this.id =comment.getId();
         this.body =comment.getBody();
-        this.created_at =comment.getCreatedAt();
-        article = new ArticleResponse(comment.getArticle());
+        this.created_at =comment.getCreatedAt().format(formatter);
+        article = new ArticleResponse(articleFromComment);
     }
 }

@@ -26,8 +26,8 @@ public class CommentService {
         return commentRepository.save(new Comment(request.getBody(), article));
     }
 
-    public Comment findComment(Long commentID) {
-        Optional<Comment> optionalComment = commentRepository.findById(commentID);
+    public Comment findComment(Long commentId) {
+        Optional<Comment> optionalComment = commentRepository.findById(commentId);
         return optionalComment.orElse(new Comment());
     }
 

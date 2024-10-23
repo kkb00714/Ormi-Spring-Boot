@@ -11,12 +11,4 @@ import lombok.Setter;
 @NoArgsConstructor
 public class AddCommentRequest {
     private String body;
-    private Article article;
-
-    public Comment toEntity() {
-        return Comment.builder()
-                .body(this.body)
-                .article(this.article)
-                .build();
-    }
 }

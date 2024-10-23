@@ -30,7 +30,7 @@ public class CommentController {
                 .body(new CommentResponse(comment));
     }
 
-    @GetMapping("/comment/{commentId}")
+    @GetMapping("/comments/{commentId}")
     public ResponseEntity<CommentResponse> selectCommentById(
             @PathVariable("commentId") Long id
     ) {

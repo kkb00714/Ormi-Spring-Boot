@@ -33,12 +33,10 @@ public class Article {
 
     @CreatedDate // 생성된 날짜, 시간을 넣어줌
     @Column(name = "created_at")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdAt;
 
     @LastModifiedDate // 업데이트된 날짜, 시간을 넣어줌.
     @Column(name = "updated_at")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updatedAt;
 
     @OneToMany(mappedBy = "article")
@@ -51,9 +49,9 @@ public class Article {
         this.content = content;
     }
 
-    public ArticleResponse convert() {
-        return new ArticleResponse(id, title, content);
-    }
+//    public ArticleResponse convert() {
+//        return new ArticleResponse(id, title, content);
+//    }
 
     public void update(String title, String content) {
         this.title = title;

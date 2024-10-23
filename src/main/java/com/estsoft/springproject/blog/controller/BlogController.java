@@ -43,7 +43,7 @@ public class BlogController {
     ) {
        Article article = service.saveArticle(request);
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(article.convert());
+                .body(new ArticleResponse(article));
     }
 
     // Read RequestMapping   조회 : GET
@@ -58,7 +58,7 @@ public class BlogController {
     public ResponseEntity<List<ArticleResponse>> findArticles() {
         List<Article> articleList = service.findAll();
         List<ArticleResponse> list = service.findAll().stream()
-                .map(Article::convert)  // article -> article.convert()
+                .map(ArticleResponse::new)  // article -> article.convert()
                 .toList();
         return ResponseEntity.ok(list);
     }
@@ -71,7 +71,7 @@ public class BlogController {
     public ResponseEntity<ArticleResponse> findOneArticles(@PathVariable Long id) {
         Article article = service.findArticleById(id);
         // Article -> ArticleResponse 변환
-        return ResponseEntity.ok(article.convert());
+        return ResponseEntity.ok(new ArticleResponse(article));
     }
 
     // Delete /articles/{id}
@@ -100,6 +100,6 @@ public class BlogController {
             @RequestBody UpdateArticleRequest request)
     {
         Article updatedArticle = service.update(id, request);
-        return ResponseEntity.ok(updatedArticle.convert());
+        return ResponseEntity.ok(new ArticleResponse(updatedArticle));
     }
 }
