@@ -14,6 +14,6 @@ public class Locker {
 
     // locker 객체에서도 Members 객체에 접근이 가능!
     // 1:1 양방향 연관 관계 설정
-    @OneToOne(mappedBy = "locker")
-    private Member member;
+//    @OneToOne(mappedBy = "locker")
+//    private Member member;
 }

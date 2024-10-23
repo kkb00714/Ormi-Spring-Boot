@@ -24,7 +24,6 @@ public class WebSecurityConfiguration {
     // ignore, 특정 페이지로 접속 시 로그인 페이지로 리다이렉션 하지 않음.
     public WebSecurityCustomizer ignore() {
         return webSecurity -> webSecurity.ignoring()
-                .requestMatchers(toH2Console()) // H2Console에 접근 시 로그인하지 않음.
                 .requestMatchers("/static/**", "/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html"); // static 하위 html 페이지에 접근 시 로그인하지 않음.
 
     }
@@ -40,8 +39,9 @@ public class WebSecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity.authorizeHttpRequests(
                 custom -> custom.requestMatchers("/login", "/signup", "/user").permitAll()
-                        .requestMatchers("/articles/**").hasRole("ADMIN") // ROLE_ADMIN 만 접근하도록
-                        .anyRequest().authenticated()
+                        // .requestMatchers("/articles/**").hasRole("ADMIN") // ROLE_ADMIN 만 접근하도록
+//                        .anyRequest().authenticated()
+                        .anyRequest().permitAll()
                 )
                 // 3) 인증, 인가 설정
                 /*

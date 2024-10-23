@@ -11,6 +11,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @NoArgsConstructor
 @Entity
@@ -20,6 +21,7 @@ import java.time.LocalDateTime;
 public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "article_id")
     private Long id;
 
     @Column(nullable = false)
@@ -35,6 +37,10 @@ public class Article {
     @LastModifiedDate // 업데이트된 날짜, 시간을 넣어줌.
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    @OneToMany(mappedBy = "article")
+    private List<Comment> comments;
+
 
     @Builder // 생성자 생성을 할 때 메서드 체이닝 형식으로 생성해줌
     public Article(String title, String content) {

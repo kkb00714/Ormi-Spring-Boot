@@ -43,7 +43,7 @@ public class BlogPageController {
     @GetMapping("/articles/{id}")
     public String showDetails(@PathVariable Long id, Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Users users = (Users) authentication.getPrincipal();
+//        Users users = (Users) authentication.getPrincipal();
 
         Article article = service.findArticleById(id);
         model.addAttribute("article", new ArticleViewResponse(article));
