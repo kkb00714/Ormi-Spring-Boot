@@ -37,4 +37,8 @@ public class CommentService {
         comment.updateCommentBody(request.getBody());
         return commentRepository.save(comment);
     }
+
+    public void deleteComment(Long commentId) {
+        commentRepository.deleteById(commentId);
+    }
 }
