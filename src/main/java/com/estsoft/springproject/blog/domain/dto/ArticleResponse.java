@@ -9,6 +9,8 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
+import static com.estsoft.springproject.util.DateFormatUtil.formatter;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -24,16 +26,16 @@ public class ArticleResponse {
     @Schema(description = "블로그 내용", type = "String")
     private String content;
 
-    private LocalDateTime createdAt;
+    private String createdAt;
 
-    private LocalDateTime updatedAt;
+    private String updatedAt;
 
     public ArticleResponse(Article article) {
         id = article.getId();
         title = article.getTitle();
         content = article.getContent();
-        createdAt = article.getCreatedAt();
-        updatedAt = article.getUpdatedAt();
+        createdAt = article.getCreatedAt().format(formatter);
+        updatedAt = article.getUpdatedAt().format(formatter);
     }
 
     public ArticleResponse(Long id, String title, String content){
