@@ -3,9 +3,13 @@ package com.estsoft.springproject.blog.service;
 import com.estsoft.springproject.blog.domain.Article;
 import com.estsoft.springproject.blog.domain.Comment;
 import com.estsoft.springproject.blog.domain.dto.AddCommentRequest;
+import com.estsoft.springproject.blog.domain.dto.CommentResponse;
 import com.estsoft.springproject.blog.repository.BlogRepository;
 import com.estsoft.springproject.blog.repository.CommentRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CommentService {
@@ -18,7 +22,12 @@ public class CommentService {
     }
 
     public Comment saveComment(Long articleId, AddCommentRequest request) {
-        Article article = blogRepository.findById(articleId).orElseThrow(); // NoSuchElementException
+        Article article = blogRepository.findById(articleId).orElseThrow();
         return commentRepository.save(new Comment(request.getBody(), article));
+    }
+
+    public Comment findComment(Long commentID) {
+        Optional<Comment> optionalComment = commentRepository.findById(commentID);
+        return optionalComment.orElse(new Comment());
     }
 }

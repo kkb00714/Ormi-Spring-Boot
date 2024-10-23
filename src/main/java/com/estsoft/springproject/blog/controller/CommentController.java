@@ -8,8 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/api/articles")
+@RequestMapping("/api")
 public class CommentController {
     private final CommentService service;
 
@@ -18,7 +20,7 @@ public class CommentController {
     }
 
     // 댓글 생성
-    @PostMapping("/{articleId}/comment")
+    @PostMapping("/articles/{articleId}/comment")
     public ResponseEntity<CommentResponse> saveCommentByArticleId(
             @PathVariable Long articleId,
             @RequestBody AddCommentRequest request
@@ -26,5 +28,11 @@ public class CommentController {
         Comment comment = service.saveComment(articleId, request);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(new CommentResponse(comment));
+    }
+
+    @GetMapping("/comment/{commentId}")
+    public ResponseEntity<CommentResponse> selectCommentById(@PathVariable("commentId") Long id) {
+        Comment comment = service.findComment(id); // 받아온 findComment(id) 값은 Comment 타입
+        return ResponseEntity.ok(new CommentResponse(comment));
     }
 }

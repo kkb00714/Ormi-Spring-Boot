@@ -21,7 +21,7 @@ public class ArticleResponse {
     @Schema(description = "블로그 제목", type = "String")
     private String title;
 
-    @Schema(description = "블로그 sodyd", type = "String")
+    @Schema(description = "블로그 내용", type = "String")
     private String content;
 
     private LocalDateTime createdAt;

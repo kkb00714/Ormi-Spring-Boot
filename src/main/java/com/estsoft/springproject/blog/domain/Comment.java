@@ -1,6 +1,5 @@
 package com.estsoft.springproject.blog.domain;
 
-import com.estsoft.springproject.blog.domain.dto.CommentResponse;
 import jakarta.persistence.*;
 import lombok.Builder;
 import org.springframework.data.annotation.CreatedDate;
@@ -36,7 +35,7 @@ public class Comment {
         this.body = body;
         this.article = article;
     }
-//
+
 //    public CommentResponse convert() {
 //        return new CommentResponse(id, body, createdAt, article);
 //    }
