@@ -31,8 +31,19 @@ public class CommentController {
     }
 
     @GetMapping("/comment/{commentId}")
-    public ResponseEntity<CommentResponse> selectCommentById(@PathVariable("commentId") Long id) {
+    public ResponseEntity<CommentResponse> selectCommentById(
+            @PathVariable("commentId") Long id
+    ) {
         Comment comment = service.findComment(id); // 받아온 findComment(id) 값은 Comment 타입
         return ResponseEntity.ok(new CommentResponse(comment));
+    }
+
+    @PutMapping("/comments/{commentId}")
+    public ResponseEntity<CommentResponse> updateCommentById(
+            @PathVariable Long commentId,
+            @RequestBody AddCommentRequest request
+    ) {
+        Comment updated = service.updateComment(commentId, request);
+        return ResponseEntity.ok(new CommentResponse(updated));
     }
 }

@@ -30,4 +30,11 @@ public class CommentService {
         Optional<Comment> optionalComment = commentRepository.findById(commentID);
         return optionalComment.orElse(new Comment());
     }
+
+    public Comment updateComment(Long commentId, AddCommentRequest request) {
+        Comment comment = commentRepository.findById(commentId).orElseThrow(); // NoSuchElementException
+        // 수정
+        comment.updateCommentBody(request.getBody());
+        return commentRepository.save(comment);
+    }
 }

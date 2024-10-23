@@ -1,6 +1,7 @@
 package com.estsoft.springproject.blog.domain;
 
 import com.estsoft.springproject.blog.domain.dto.ArticleResponse;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -32,10 +33,12 @@ public class Article {
 
     @CreatedDate // 생성된 날짜, 시간을 넣어줌
     @Column(name = "created_at")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdAt;
 
     @LastModifiedDate // 업데이트된 날짜, 시간을 넣어줌.
     @Column(name = "updated_at")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updatedAt;
 
     @OneToMany(mappedBy = "article")
