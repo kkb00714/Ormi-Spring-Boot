@@ -32,11 +32,11 @@ public class Article {
     private String content;
 
     @CreatedDate // 생성된 날짜, 시간을 넣어줌
-    @Column(name = "created_at")
+    @Column
     private LocalDateTime createdAt;
 
     @LastModifiedDate // 업데이트된 날짜, 시간을 넣어줌.
-    @Column(name = "updated_at")
+    @Column
     private LocalDateTime updatedAt;
 
     @OneToMany(mappedBy = "article")
