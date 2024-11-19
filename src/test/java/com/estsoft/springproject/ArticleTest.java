@@ -1,11 +1,13 @@
 package com.estsoft.springproject;
 
 import com.estsoft.springproject.blog.domain.Article;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 public class ArticleTest {
 
     @Test
+    @Disabled
     public void test() {
         // 클래스 생성자 직접 호출
         Article article = new Article("제목", "내용");

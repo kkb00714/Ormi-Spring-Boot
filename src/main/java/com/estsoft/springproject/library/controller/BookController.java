@@ -13,9 +13,11 @@ import java.util.List;
 @RequestMapping("/books")
 public class BookController {
     private final BookService service;
+    private final BookService bookService;
 
-    public BookController(BookService service) {
+    public BookController(BookService service, BookService bookService) {
         this.service = service;
+        this.bookService = bookService;
     }
 
     // 책 전체 조회
@@ -28,6 +30,14 @@ public class BookController {
         model.addAttribute("bookList", list);
         return "bookManagement";
     }
+
+    // 책 전체 조회 api
+    @GetMapping("/api")
+    @ResponseBody
+    public List<Book> getBooks() {
+        return bookService.findAll();
+    }
+
 
     // 책 단건 조회
     @GetMapping("/{id}")

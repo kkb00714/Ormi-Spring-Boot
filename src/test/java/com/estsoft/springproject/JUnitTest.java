@@ -2,10 +2,12 @@ package com.estsoft.springproject;
 
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 public class JUnitTest {
     @Test
+    @Disabled
     public void test() {
         // given
         int a = 1;

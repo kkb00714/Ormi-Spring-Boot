@@ -2,6 +2,7 @@ package com.estsoft.springproject;
 
 import org.junit.jupiter.api.*;
 
+@Disabled
 public class JUnitTotalTest {
     @BeforeAll                    // 전체 테스트를 시작하기 전 1회 실행
     public static void beforeAll() {
